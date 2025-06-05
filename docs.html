@@ -1,102 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <title>Alpha Token Supply Documentation</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <!-- Marked.js for Markdown rendering -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- MathJax for LaTeX rendering -->
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true,
-                tags: 'ams',
-                packages: {'[+]': ['bbox']}
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        nav.docs-nav {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 1000;
-        }
-        .docs-nav a {
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            background: #f0f0f0;
-            color: #333;
-        }
-        .docs-nav a:hover {
-            background: #e0e0e0;
-        }
-        body {
-            padding-top: 3rem;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f5f5f5;
-        }
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list[class]{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        font-size: inherit;
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1.6em;
+        vertical-align: middle;
+      }
+      .nav-container {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+        display: flex;
+        gap: 1rem;
+      }
+      .nav-container a {
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        background: #f0f0f0;
+        color: #333;
+      }
+      .nav-container a:hover {
+        background: #e0e0e0;
+      }
+      body {
+        margin: 0;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1em 0;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      th {
+        background-color: #f5f5f5;
+      }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   </head>
   <body>
-    <nav class="docs-nav">
-        <a href="#" onclick="return false;">Docs</a>
+    <nav class="nav-container">
+      <a href="/">Calculator</a>
+      <a href="/docs.html">Docs</a>
     </nav>
-    <div class="container" id="content">
-        Loading...
+    <div class="content">
+      Loading...
     </div>
     <script>
-        // Function to fetch and render markdown
-        async function loadMarkdown() {
-            try {
-                const response = await fetch('alphaVal.md');
-                const text = await response.text();
-                
-                // Configure marked options
-                marked.setOptions({
-                    breaks: true,
-                    gfm: true
-                });
+      // Function to fetch and render markdown
+      async function loadMarkdown() {
+        try {
+          const response = await fetch('alphaVal.md');
+          const text = await response.text();
+          
+          // Configure marked options
+          marked.setOptions({
+            breaks: true,
+            gfm: true
+          });
 
-                // Render markdown to HTML
-                document.getElementById('content').innerHTML = marked.parse(text);
+          // Render markdown to HTML
+          document.getElementById('content').innerHTML = marked.parse(text);
 
-                // Render math expressions
-                MathJax.typesetPromise();
-            } catch (error) {
-                console.error('Error loading markdown:', error);
-                document.getElementById('content').innerHTML = 'Error loading content';
-            }
+          // Render math expressions
+          MathJax.typesetPromise();
+        } catch (error) {
+          console.error('Error loading markdown:', error);
+          document.getElementById('content').innerHTML = 'Error loading content';
         }
+      }
 
-        // Load markdown when page loads
-        window.addEventListener('load', loadMarkdown);
+      // Load markdown when page loads
+      window.addEventListener('load', loadMarkdown);
     </script>
   </body>
 </html> 
