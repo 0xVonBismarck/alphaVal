@@ -13,11 +13,19 @@
   "version": 2,
   "routes": [
     {
+      "src": "/docs.html",
+      "dest": "/docs.html"
+    },
+    {
       "src": "/alphaVal.md",
       "headers": {
         "Content-Type": "text/markdown",
         "Access-Control-Allow-Origin": "*"
       }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 } 
