@@ -129,7 +129,7 @@ body {
 
 /* Main Content */
 .main-content {
-  padding: 2rem 1rem 3rem;
+  padding: 2rem 0.5rem 3rem;
 }
 
 /* Documentation Styles */
@@ -164,7 +164,7 @@ h1 {
 }
 
 .controls {
-  width: calc(100vw - 2rem);
+  width: 100%;
   margin: 0 0 2rem 0;
   background: var(--bg-secondary);
   padding: 1.5rem;
@@ -271,7 +271,7 @@ h1 {
 }
 
 .chart-section {
-  width: calc(100vw - 2rem);
+  width: 100%;
   margin: 0;
   background: var(--bg-secondary);
   padding: 1rem;
