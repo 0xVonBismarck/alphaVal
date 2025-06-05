@@ -164,7 +164,7 @@ h1 {
 }
 
 .controls {
-  width: 100%;
+  width: calc(100vw - 2rem);
   margin: 0 0 2rem 0;
   background: var(--bg-secondary);
   padding: 1.5rem;
@@ -271,7 +271,7 @@ h1 {
 }
 
 .chart-section {
-  width: 100%;
+  width: calc(100vw - 2rem);
   margin: 0;
   background: var(--bg-secondary);
   padding: 1rem;
