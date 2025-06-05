@@ -20,34 +20,11 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    .display.math{display: block; text-align: center; margin: 1em auto;}
-    table { width: 100%; margin: 1em 0; border-collapse: collapse; }
-    th, td { padding: 0.5em; border: 1px solid #ddd; }
-    body { max-width: 1200px; margin: 0 auto; padding: 2rem; }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
-  <script>
-    window.MathJax = {
-      loader: {load: ['[tex]/ams', '[tex]/mathtools']},
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        packages: {'[+]': ['ams', 'mathtools']},
-        tags: 'ams',
-        tagSide: 'right',
-        macros: {
-          R: '\\mathbb{R}',
-          set: ['\\left\\{#1\\right\\}', 1],
-          abs: ['\\left|#1\\right|', 1],
-          norm: ['\\left\\|#1\\right\\|', 1]
-        }
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
 </head>
 <body>
 <header id="title-block-header">
@@ -64,7 +41,7 @@ and the sentiment  anchor while adjusting the valuation by a supply
 anchor.</p>
 <hr />
 <h2 id="motivation">2 Motivation</h2>
-<p>Under Dynamic TAO every subnet's token supply, reward schedule and
+<p>Under Dynamic TAO every subnet’s token supply, reward schedule and
 burn mechanics differ materially from conventional Web 3 projects.
 Early‑epoch inflation, hardware intensity and the interplay between
 Alpha prices and TAO halvings complicate standard venture valuation
@@ -79,9 +56,9 @@ venture capital.</li>
 </ul>
 <p>This valuation rubric therefore aims to help:</p>
 <ul>
-<li><strong>Founders</strong> — justify raises without over‑ or
+<li><strong>Founders</strong> — justify raises without over‑ or
 under‑diluting.</li>
-<li><strong>Investors</strong> — price risk amid moving issuance, burns
+<li><strong>Investors</strong> — price risk amid moving issuance, burns
 and hardware costs.</li>
 </ul>
 <hr />
@@ -124,7 +101,7 @@ and hardware costs.</li>
 </table>
 <h3
 id="costofparticipation-cop-economic-floor">3.1 Cost‑of‑Participation
-(CoP) — economic floor</h3>
+(CoP) — economic floor</h3>
 <p>The CoP quantifies the minimum rational valuation at which miners and
 validators will continue to participate. Should a subnet trade below
 this level, rational operators will redirect resources to more
@@ -140,9 +117,9 @@ profitable alternatives.</p>
 <thead>
 <tr>
 <th>Spec (per node)</th>
-<th>Cap‑ex $ day⁻¹*</th>
-<th>Power $ day⁻¹†</th>
-<th><strong>Total $ day⁻¹</strong></th>
+<th>Cap‑ex $ day⁻¹*</th>
+<th>Power $ day⁻¹†</th>
+<th><strong>Total $ day⁻¹</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -153,44 +130,34 @@ profitable alternatives.</p>
 <td><strong>3.20</strong></td>
 </tr>
 <tr>
-<td>8 × RTX 4090</td>
+<td>8 × RTX 4090</td>
 <td>25.00</td>
 <td>18.00</td>
 <td><strong>43.00</strong></td>
 </tr>
 <tr>
-<td>8 × A100</td>
+<td>8 × A100</td>
 <td>64.00</td>
 <td>22.00</td>
 <td><strong>86.00</strong></td>
 </tr>
 <tr>
-<td>8 × H200</td>
+<td>8 × H200</td>
 <td>90.00</td>
 <td>25.00</td>
 <td><strong>115.00</strong></td>
 </tr>
-<tr>
-<td><em>Five‑year straight‑line depreciation + 12 % financing
-cost.</em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>†Electricity 0.12 USD kWh⁻¹, PUE = 1.2.</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
+<p><sup>1</sup> Five-year straight-line depreciation, 12 % cost of
+capital.<br />
+<sup>2</sup> Operating electricity cost.</p>
 <h4 id="formula">3.1.2 Formula</h4>
-<p>Let </p>
-<p>* N = miner‑node count, N**v = validator‑node count
-* M, V = per‑node daily costs from Table 3.1
-* K ≥ 1 = labour‑complexity multiplier (baseline 1.0)
-* P**α = spot price of the subnet's Alpha token</p>
+<p>Let </p>
+<p>* <em>N</em> = miner‑node count, <em>N**v</em> = validator‑node count
+* <em>M</em>, <em>V</em> = per‑node daily costs from Table 3.1
+* <em>K ≥ 1</em> = labour‑complexity multiplier (baseline 1.0)
+* <em>P**α</em> = spot price of the subnet’s Alpha token</p>
 <p>Daily burn (USD)</p>
 <p><span class="math display">\[
 C = 365.25\,K\bigl(N\,M + N_{v}\,V\bigr) \tag{3.1}
@@ -201,13 +168,13 @@ C = 365.25\,K\bigl(N\,M + N_{v}\,V\bigr) \tag{3.1}
 \]</span></p>
 <hr />
 <h3 id="netpresent-value-of-users-npvu-demand-upside">3.2 Net‑Present
-Value of Users (NPVU) — demand upside</h3>
-<p>Given steady‑state users U and average revenue per
-user ARPU (USD),</p>
+Value of Users (NPVU) — demand upside</h3>
+<p>Given steady‑state users <em>U</em> and average revenue per
+user <strong>ARPU</strong> (USD),</p>
 <p><span class="math display">\[
 \boxed{\text{NPVU} = \dfrac{U\,\text{ARPU}}{d}} \tag{3.3}
 \]</span></p>
-<p>For a finite horizon T years</p>
+<p>For a finite horizon <em>T</em> years</p>
 <p><span class="math display">\[
 \text{NPVU}_T = U\,\text{ARPU}\,\frac{1 - (1+d)^{-T}}{d} \tag{3.4}
 \]</span></p>
@@ -228,8 +195,8 @@ roadmap—determine where a subnet fits on the deal curve.</p>
 <thead>
 <tr>
 <th><strong>Round</strong></th>
-<th>Avg Raise</th>
-<th>Avg Valuation</th>
+<th>Avg Raise</th>
+<th>Avg Valuation</th>
 <th>Q1</th>
 <th><strong>Median</strong></th>
 <th>Q3</th>
@@ -239,53 +206,53 @@ roadmap—determine where a subnet fits on the deal curve.</p>
 <tbody>
 <tr>
 <td><strong>Pre‑Seed</strong></td>
-<td> $ 2.60 M</td>
-<td> $ 28.6 M</td>
-<td>10 M</td>
-<td><strong>20 M</strong></td>
-<td>30 M</td>
-<td> 57</td>
+<td> $ 2.60 M</td>
+<td> $ 28.6 M</td>
+<td>10 M</td>
+<td><strong>20 M</strong></td>
+<td>30 M</td>
+<td> 57</td>
 </tr>
 <tr>
 <td><strong>Seed</strong></td>
-<td> $ 5.05 M</td>
-<td> $ 47.2 M</td>
-<td>15 M</td>
-<td><strong>26.8 M</strong></td>
-<td>50 M</td>
-<td> 156</td>
+<td> $ 5.05 M</td>
+<td> $ 47.2 M</td>
+<td>15 M</td>
+<td><strong>26.8 M</strong></td>
+<td>50 M</td>
+<td> 156</td>
 </tr>
 <tr>
 <td><strong>Strategic</strong></td>
-<td> $ 4.44 M</td>
-<td> $ 66.0 M</td>
-<td>26 M</td>
-<td><strong>50 M</strong></td>
-<td>75 M</td>
-<td> 34</td>
+<td> $ 4.44 M</td>
+<td> $ 66.0 M</td>
+<td>26 M</td>
+<td><strong>50 M</strong></td>
+<td>75 M</td>
+<td> 34</td>
 </tr>
 <tr>
 <td><strong>Private</strong></td>
-<td> $ 5.83 M</td>
-<td> $ 71.4 M</td>
-<td>21 M</td>
-<td><strong>44 M</strong></td>
-<td>72 M</td>
-<td> 64</td>
+<td> $ 5.83 M</td>
+<td> $ 71.4 M</td>
+<td>21 M</td>
+<td><strong>44 M</strong></td>
+<td>72 M</td>
+<td> 64</td>
 </tr>
 <tr>
-<td><strong>Series A</strong></td>
-<td> $ 4.50 M</td>
-<td> $ 125 M</td>
-<td>113 M</td>
-<td><strong>125 M</strong></td>
-<td>138 M</td>
-<td> 2</td>
+<td><strong>Series A</strong></td>
+<td> $ 4.50 M</td>
+<td> $ 125 M</td>
+<td>113 M</td>
+<td><strong>125 M</strong></td>
+<td>138 M</td>
+<td> 2</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="inflation-analysis-supply-anchor">3.4 Inflation analysis —
+<h3 id="inflation-analysis-supply-anchor">3.4 Inflation analysis —
 supply anchor</h3>
 <h4 id="maximum-issuance-per-block">3.4.1 Maximum issuance per
 block</h4>
@@ -301,14 +268,14 @@ block</h4>
 \boxed{\Delta\alpha_{\min} = 2\,\delta - \bigl[\beta_{m}(0.41)\,\delta +
 B_{r} + B_{x}\bigr] \tag{3.7}}
 \]</span></p>
-<p>Here β**m** is the miner‑burn
-fraction, B**r** the per‑block
-registration burn, and B**x** any
+<p>Here <span class="math inline">\(\beta_{m}\)</span> is the miner‑burn
+fraction, <span class="math inline">\(B_{r}\)</span> the per‑block
+registration burn, and <span class="math inline">\(B_{x}\)</span> any
 additional external burn (read revenues).</p>
 <h4 id="cumulative-supply-up-to-horizon-t">3.4.3 Cumulative supply up to
-horizon T</h4>
-<p>Let t**0** be subnet genesis;
-integrate over time t:</p>
+horizon <span class="math inline">\(T\)</span></h4>
+<p>Let <span class="math inline">\(t_0\)</span> be subnet genesis;
+integrate over time <span class="math inline">\(t\)</span>:</p>
 <p><span class="math display">\[
 S_{\max}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\max}(t)\,\mathrm{d}t,
 \qquad
@@ -318,7 +285,8 @@ S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t
 <p>Numerical evaluation is implemented in the companion calculator.</p>
 <h4 id="estimating-future-circulating-supply">3.4.4 Estimating Future
 Circulating Supply</h4>
-<p>To project the circulating Alpha at a future date (T) you must specify:</p>
+<p>To project the circulating Alpha at a future date (<span
+class="math inline">\(T\)</span>) you must specify:</p>
 <table>
 <colgroup>
 <col style="width: 48%" />
@@ -373,7 +341,7 @@ Block-level issuance across a halving boundary</h4>
 <li><span class="math inline">\(D = T - t_{\text{now}}\)</span> = days
 until horizon,<br />
 </li>
-<li><span class="math inline">\(D_h\)</span> = days from now to
+<li><span class="math inline">\(D_h\)</span> = days from <em>now</em> to
 the TAO-halving date <span class="math inline">\(T_h\)</span> (clip to 0
 if <span class="math inline">\(T \le T_h\)</span>),<br />
 </li>
@@ -383,7 +351,8 @@ if <span class="math inline">\(T \le T_h\)</span>),<br />
 class="math inline">\(D_1 = \min(D, D_h)\)</span>) and <strong>Segment
 2</strong> (post-halving, <span class="math inline">\(D_2 = D -
 D_1\)</span>).</p>
-<p>For each segment k∈{1,2} set</p>
+<p>For each segment <span class="math inline">\(k\in\{1,2\}\)</span>
+set</p>
 <p><span class="math display">\[
 \Delta\tau^{(k)} =
 \begin{cases}
@@ -410,7 +379,7 @@ M^{(k)} = 7\,200 \times D_k \times
 \Delta\alpha_{\text{net}}^{(k)}\tag{3.12}
 \]</span></p>
 <h4 id="projected-circulating-supply-at-t">3.4.7 Projected circulating
-supply at T</h4>
+supply at <span class="math inline">\(T\)</span></h4>
 <p><span class="math display">\[
 \boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}\tag{3.13}
 \]</span></p>
@@ -434,15 +403,15 @@ class="math inline">\(S(T) \approx 3.15\)</span> M Alpha.</p>
 range</h2>
 <p>Combining the above methods allows a price range to be generated,
 specific assumptions can be refined on the supply scales to narrow the
-range. </p>
+range. </p>
 <ol type="1">
-<li>Floor = NPC.</li>
-<li>Ceiling = NPVU + strategic premium.</li>
-<li>Scale by forecast supply at horizon T.</li>
-<li>Apply illiquidity discount $$ (20–40 %).</li>
+<li>Floor = NPC.</li>
+<li>Ceiling = NPVU + strategic premium.</li>
+<li>Scale by forecast supply at horizon <em>T</em>.</li>
+<li>Apply illiquidity discount $$ (20–40 %).</li>
 </ol>
 <p><span class="math display">\[
-\text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\;
+\text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\;
 \tfrac{\text{NPVU}+\text{Premium}}{S_{\min}(T)}\Bigr] (1-\lambda).
 \tag{4.1}
 \]</span></p>
@@ -468,9 +437,9 @@ absolute truth.</p>
 </thead>
 <tbody>
 <tr>
-<td>Σ price path</td>
+<td>Σ price path</td>
 <td>Flat</td>
-<td>±100 % trajectories</td>
+<td>±100 % trajectories</td>
 </tr>
 <tr>
 <td>TAO halving delay</td>
