@@ -4,7 +4,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Build outputs
+# Production build
 dist/
 build/
 
@@ -43,13 +43,14 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 
-# Temporary files
-*.tmp
-*.temp
+# Dependency directories
+jspm_packages/
 
-# Generated HTML files (from pandoc)
-*.html
+# Optional npm cache directory
+.npm
 
-# MSI installer files
-*.msi 
+# Optional eslint cache
+.eslintcache
+
+# Vercel
 .vercel

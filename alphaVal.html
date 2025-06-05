@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>alphaVal</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="bittensor-subnet-valuation-framework">Bittensor Subnet Valuation
+Framework</h1>
+<p><em>Revised 4 June 2025</em></p>
+<hr />
+<h2 id="introduction">1 Introduction</h2>
+<p>This memorandum develops an analytical framework for valuing
+Bittensor subnets.<br />
+The treatment combines</p>
+<ol type="1">
+<li>hardware operating expenditure,<br />
+</li>
+<li>user-generated cash-flows,<br />
+</li>
+<li>peer financing benchmarks, and<br />
+</li>
+<li>the token-supply mechanics dictated by Dynamic TAO (dTAO).</li>
+</ol>
+<p>All monetary figures are stated in United States dollars (USD) unless
+noted; all present-value calculations employ a <strong>20
+percent</strong> discount rate (denoted <span class="math inline">\(d =
+0.20\)</span>).</p>
+<hr />
+<h2 id="motivation">2 Motivation</h2>
+<p>Under Dynamic TAO every subnet’s token supply, reward schedule and
+burn mechanics differ materially from conventional Web 3 projects.
+Early‑epoch inflation, hardware intensity and the interplay between
+Alpha prices and TAO halvings complicate standard venture valuation
+heuristics. A transparent framework is therefore required to:</p>
+<ul>
+<li>benchmark the economic floor for securing a subnet;</li>
+<li>quantify the upside from prospective user adoption;</li>
+<li>reconcile token‑supply growth with comparable market valuations;
+and</li>
+<li>provide investors a defensible discount or premium when committing
+off‑chain capital.</li>
+</ul>
+<p>The sections that follow operationalise these objectives via four
+complementary lenses.</p>
+<hr />
+<h2 id="methodological-pillars">3 Methodological Pillars</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 63%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Captured quantity</th>
+<th>Output symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cost-of-Participation</td>
+<td>Net-present cost of running the required mining + validation
+set</td>
+<td><span class="math inline">\(NPC_\alpha\)</span></td>
+</tr>
+<tr>
+<td>Net-Present Value of Users</td>
+<td>Discounted profit stream from end users</td>
+<td><span class="math inline">\(NPVU_\alpha\)</span></td>
+</tr>
+<tr>
+<td>Comparable-Deals Benchmark</td>
+<td>Median post-money valuations from 313 decentralised-AI
+financings</td>
+<td><span class="math inline">\(V_{\text{market}}\)</span></td>
+</tr>
+<tr>
+<td>Inflation Anchoring</td>
+<td>Circulating Alpha at investor horizon <span
+class="math inline">\(T\)</span></td>
+<td><span class="math inline">\(S_{\max}(T),\,S_{\min}(T)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline">\(S_{\max}(T)\)</span> and <span
+class="math inline">\(S_{\min}(T)\)</span> denote, respectively, the
+cumulative Alpha under maximal and minimal issuance (derived in
+Section 6).</p>
+<hr />
+<h2 id="cost-of-participation-cop">4 Cost-of-Participation (CoP)</h2>
+<h3 id="per-node-operating-expenditure">4.1 Per-node operating
+expenditure</h3>
+<p>(The table below assumes a power price of 0.12 USD kWh⁻¹ and PUE =
+1.2.)</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hardware profile</th>
+<th>Cap-ex $ day⁻¹ ¹</th>
+<th>Power $ day⁻¹ ²</th>
+<th><strong>Total $ day⁻¹</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU only</td>
+<td>2.00</td>
+<td>1.20</td>
+<td><strong>3.20</strong></td>
+</tr>
+<tr>
+<td>8 × RTX 4090</td>
+<td>25.00</td>
+<td>18.00</td>
+<td><strong>43.00</strong></td>
+</tr>
+<tr>
+<td>8 × A100</td>
+<td>64.00</td>
+<td>22.00</td>
+<td><strong>86.00</strong></td>
+</tr>
+<tr>
+<td>8 × H200</td>
+<td>90.00</td>
+<td>25.00</td>
+<td><strong>115.00</strong></td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> Five-year straight-line depreciation, 12 % cost of
+capital.<br />
+<sup>2</sup> Operating electricity cost.</p>
+<h3 id="subnet-level-expenditure-and-present-value">4.2 Subnet-level
+expenditure and present value</h3>
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(N\)</span> = miner-node count, <span
+class="math inline">\(N_v\)</span> = validator-node count;<br />
+</li>
+<li><span class="math inline">\(M\)</span> and <span
+class="math inline">\(V\)</span> = per-node daily costs from Table
+4.1;<br />
+</li>
+<li><span class="math inline">\(K\ge1\)</span> = labour-complexity
+multiplier (baseline 1.0);<br />
+</li>
+<li><span class="math inline">\(P_\alpha\)</span> = spot price of the
+subnet’s Alpha token.</li>
+</ul>
+<p>Daily burn (USD)</p>
+<p><span class="math display">\[
+C = 365.25K(NM + N_vV).
+\]</span></p>
+<p>Present value (USD)</p>
+<p><span class="math display">\[
+\mathrm{NPC}_{\text{USD}} = \frac{C}{d}.
+\]</span></p>
+<p>Converted to Alpha</p>
+<p><span class="math display">\[
+\boxed{\mathrm{NPC}_{\alpha} = \frac{C}{d\,P_\alpha}}.
+\]</span></p>
+<hr />
+<h2 id="net-present-value-of-user-cash-flows-npvu">5 Net-Present Value
+of User Cash-Flows (NPVU)</h2>
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(U\)</span> = steady-state active user
+count,<br />
+</li>
+<li><span class="math inline">\(\text{ARPU}\)</span> = average revenue
+per user per year (USD).</li>
+</ul>
+<p>Perpetuity (USD)</p>
+<p><span class="math display">\[
+\mathrm{NPVU}_{\text{USD}} = \frac{U\;\text{ARPU}}{d}.
+\]</span></p>
+<p>Finite horizon <span class="math inline">\(T\)</span> years</p>
+<p><span class="math display">\[
+\mathrm{NPVU}_{T,\text{USD}} = U\,\text{ARPU}\,\frac{1-(1+d)^{-T}}{d}.
+\]</span></p>
+<p>After division by <span class="math inline">\(P_\alpha\)</span> the
+result is <span class="math inline">\(NPVU_\alpha\)</span>.</p>
+<hr />
+<h2 id="comparable-deals-benchmark">6 Comparable-Deals Benchmark</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Median valuation (USD M)</th>
+<th>Observations</th>
+<th>IQR (25–75 %)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-Seed</td>
+<td>20</td>
+<td>57</td>
+<td>10 – 30</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td>26.8</td>
+<td>156</td>
+<td>15 – 50</td>
+</tr>
+<tr>
+<td>Strategic</td>
+<td>50</td>
+<td>34</td>
+<td>26 – 75</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>44</td>
+<td>64</td>
+<td>21 – 72</td>
+</tr>
+<tr>
+<td>Series A</td>
+<td>125</td>
+<td>2</td>
+<td>113 – 138</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="token-supply-dynamics">7 Token-Supply Dynamics</h2>
+<h3 id="maximum-per-block-issuance">7.1 Maximum per-block issuance</h3>
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(\Delta\tau\)</span> = TAO minted per
+base-chain block,<br />
+</li>
+<li><span class="math inline">\(\sum_{j}p_{j}\)</span> = cross-subnet
+price sum (empirically 1–2, baseline 1.5),<br />
+</li>
+<li><span class="math inline">\(\overline{\Delta\alpha_{i}}\)</span> =
+subnet-specific hard cap on Alpha issuance.</li>
+</ul>
+<p><span class="math display">\[
+\delta_1 = \frac{\Delta \tau}{\sum_{j} p_{j}},\quad
+\delta_2 = \overline{\Delta\alpha_{i}},\quad
+\delta   = \min(\delta_1,\delta_2).
+\]</span></p>
+<p>Maximum issuance</p>
+<p><span class="math display">\[
+\boxed{\Delta\alpha_{\max} = 2\,\delta}.
+\]</span></p>
+<h3 id="minimum-net-issuance">7.2 Minimum net issuance</h3>
+<p>Define</p>
+<ul>
+<li><span class="math inline">\(\beta_m\)</span> = fraction of miners’
+reward (0.41 δ) immediately burned,<br />
+</li>
+<li><span class="math inline">\(B_r,\,B_x\)</span> = registration and
+external burns (Alpha block⁻¹).</li>
+</ul>
+<p><span class="math display">\[
+\boxed{\Delta\alpha_{\min} =
+       2\,\delta -
+       \bigl[\beta_m\,(0.41)\,\delta + B_r + B_x\bigr]}.
+\]</span></p>
+<h3 id="cumulative-supply-up-to-horizon-t">7.3 Cumulative supply up to
+horizon <em>T</em></h3>
+<p>Let <span class="math inline">\(t_0\)</span> be subnet genesis;
+integrate over time <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+S_{\max}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\max}(t)\,\mathrm{d}t,
+\qquad
+S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t.
+\]</span></p>
+<p>Numerical evaluation is implemented in the companion calculator.</p>
+<hr />
+<h2 id="estimating-future-circulating-supply">8 Estimating Future
+Circulating Supply</h2>
+<p>To estimate the circulating Alpha at a future date <span
+class="math inline">\(T\)</span> the investor specifies:</p>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 24%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>Required input</th>
+<th>Symbol</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing circulating supply (today)</td>
+<td><span class="math inline">\(S_0\)</span></td>
+<td>as on-chain</td>
+</tr>
+<tr>
+<td>Average sum-of-prices <span class="math inline">\(\langle\sum
+p\rangle\)</span></td>
+<td><span class="math inline">\(\Sigma\)</span></td>
+<td>choose within 1 – 2</td>
+</tr>
+<tr>
+<td>Miner-burn fraction</td>
+<td><span class="math inline">\(\beta_m\)</span></td>
+<td>0 – 1</td>
+</tr>
+<tr>
+<td>Registration burn / block</td>
+<td><span class="math inline">\(B_r\)</span></td>
+<td>Alpha block⁻¹</td>
+</tr>
+<tr>
+<td>External burn / block</td>
+<td><span class="math inline">\(B_x\)</span></td>
+<td>Alpha block⁻¹</td>
+</tr>
+<tr>
+<td>Next TAO-halving date</td>
+<td><span class="math inline">\(T_h\)</span></td>
+<td>calendar date</td>
+</tr>
+</tbody>
+</table>
+<h3 id="block-level-issuance-across-a-halving-boundary">8.1 Block-level
+issuance across a halving boundary</h3>
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(D = T - t_{\text{now}}\)</span> = days
+until horizon,<br />
+</li>
+<li><span class="math inline">\(D_h\)</span> = days from <em>now</em> to
+the TAO-halving date <span class="math inline">\(T_h\)</span> (clip to 0
+if <span class="math inline">\(T \le T_h\)</span>),<br />
+</li>
+<li>7 200 blocks per day.</li>
+</ul>
+<p>Split the horizon into <strong>Segment 1</strong> (pre-halving, <span
+class="math inline">\(D_1 = \min(D, D_h)\)</span>) and <strong>Segment
+2</strong> (post-halving, <span class="math inline">\(D_2 = D -
+D_1\)</span>).</p>
+<p>For each segment <span class="math inline">\(k\in\{1,2\}\)</span>
+set</p>
+<p><span class="math display">\[
+\Delta\tau^{(k)} =
+\begin{cases}
+\Delta\tau_{\text{current}}, &amp; k=1 \\
+\frac{1}{2}\,\Delta\tau_{\text{current}}, &amp; k=2
+\end{cases}
+\]</span></p>
+<p>Compute the per-block limit</p>
+<p><span class="math display">\[
+\delta^{(k)} = \min\!\Bigl(\tfrac{\Delta\tau^{(k)}}{\Sigma},
+                           \overline{\Delta\alpha_{i}}\Bigr).
+\]</span></p>
+<h3 id="net-alpha-minted-in-each-segment">8.2 Net Alpha minted in each
+segment</h3>
+<p>Net per block</p>
+<p><span class="math display">\[
+\Delta\alpha_{\text{net}}^{(k)} =
+  2\,\delta^{(k)} -
+  \bigl[\beta_m\,(0.41)\,\delta^{(k)} + B_r + B_x\bigr].
+\]</span></p>
+<p>Total minted</p>
+<p><span class="math display">\[
+M^{(k)} = 7\,200 \times D_k \times \Delta\alpha_{\text{net}}^{(k)}.
+\]</span></p>
+<h3 id="projected-circulating-supply-at-t">8.3 Projected circulating
+supply at <span class="math inline">\(T\)</span></h3>
+<p><span class="math display">\[
+\boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}.
+\]</span></p>
+<blockquote>
+<p><strong>Worked example</strong><br />
+<em>Inputs:</em> <span class="math inline">\(S_0 = 2.5\)</span> M Alpha,
+<span class="math inline">\(\Sigma = 1.5\)</span>, <span
+class="math inline">\(\beta_m = 0.25\)</span>,<br />
+<span class="math inline">\(B_r = 0.02\)</span>, <span
+class="math inline">\(B_x = 0\)</span> Alpha block⁻¹, current <span
+class="math inline">\(\Delta\tau = 1\)</span>,<br />
+TAO halving in 180 days, horizon <span class="math inline">\(T\)</span>
+in 540 days.</p>
+<p>Segment-level calculations yield <span class="math inline">\(M^{(1)}
+\approx 0.47\)</span> M,<br />
+<span class="math inline">\(M^{(2)} \approx 0.18\)</span> M, hence <span
+class="math inline">\(S(T) \approx 3.15\)</span> M Alpha.</p>
+</blockquote>
+<hr />
+<h2 id="conclusion">9 Conclusion</h2>
+<p>The framework now enables a practitioner to project circulating
+supply directly from observable burns, price aggregates and halving
+timing, then embed that projection into cost-, demand- and market-based
+valuation bounds.<br />
+All variables are defined locally at first use to minimise
+cross-reference latency; numerical examples are readily reproduced with
+the associated calculator.</p>
+</body>
+</html>

@@ -1,23 +1,176 @@
+/* CSS Variables for Light Theme */
+:root {
+  --bg-primary: #f4f7fa;
+  --bg-secondary: #fff;
+  --text-primary: #222;
+  --text-secondary: #666;
+  --border-color: #e0e0e0;
+  --border-input: #ccc;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --accent-primary: #0077ff;
+  --accent-hover: #005fd1;
+  --accent-bg: #f0f8ff;
+  --accent-bg-active: #e6f3ff;
+  --slider-track: #ddd;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --text-primary: #e6e6e6;
+  --text-secondary: #a0a0a0;
+  --border-color: #2d3748;
+  --border-input: #4a5568;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --accent-primary: #4a9eff;
+  --accent-hover: #66b3ff;
+  --accent-bg: #1a2332;
+  --accent-bg-active: #243447;
+  --slider-track: #4a5568;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  padding: 0 1rem 3rem;
-  background: #f4f7fa;
-  color: #222;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header Styles */
+.app-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.header-title {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-title h1 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: var(--accent-primary);
+  background: var(--accent-bg);
+}
+
+.nav-link.active {
+  color: var(--accent-primary);
+  background: var(--accent-bg-active);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  margin-left: 0.5rem;
+}
+
+.theme-toggle:hover {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  background: var(--accent-bg);
+}
+
+.theme-toggle svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+.theme-toggle:hover svg {
+  transform: scale(1.1);
+}
+
+/* Main Content */
+.main-content {
+  padding: 2rem 1rem 3rem;
+}
+
+/* Documentation Styles */
+.documentation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--shadow);
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.documentation-iframe {
+  width: 100%;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+  border: none;
+}
+
+/* Calculator Styles */
+.calculator {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 h1 {
   text-align: center;
   margin: 1rem 0;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .controls {
   max-width: 900px;
   margin: 0 auto 2rem;
-  background: #fff;
+  background: var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: background-color 0.3s ease;
 }
 
 .input-form {
@@ -36,43 +189,55 @@ h1 {
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
   font-weight: 500;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .field input {
   padding: 0.4rem 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-input);
   border-radius: 4px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
 /* Range slider styling */
 .field input[type="range"] {
   padding: 0;
   height: 6px;
-  background: #ddd;
+  background: var(--slider-track);
   border: none;
   border-radius: 3px;
   outline: none;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .field input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 18px;
   height: 18px;
-  background: #0077ff;
+  background: var(--accent-primary);
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }
 
 .field input[type="range"]::-webkit-slider-thumb:hover {
-  background: #005fd1;
+  background: var(--accent-hover);
 }
 
 .field input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
-  background: #0077ff;
+  background: var(--accent-primary);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -80,19 +245,19 @@ h1 {
 }
 
 .field input[type="range"]::-moz-range-thumb:hover {
-  background: #005fd1;
+  background: var(--accent-hover);
 }
 
 .field input[type="range"]::-moz-range-track {
   height: 6px;
-  background: #ddd;
+  background: var(--slider-track);
   border-radius: 3px;
   border: none;
 }
 
 .calculate-btn {
   padding: 0.6rem 1.2rem;
-  background: #0077ff;
+  background: var(--accent-primary);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -102,19 +267,53 @@ h1 {
 }
 
 .calculate-btn:hover {
-  background: #005fd1;
+  background: var(--accent-hover);
 }
 
 .chart-section {
   max-width: 900px;
   margin: 0 auto;
-  background: #fff;
+  background: var(--bg-secondary);
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: background-color 0.3s ease;
 }
 
 .chart-container {
   width: 100%;
   max-height: 480px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 0.5rem;
+  }
+  
+  .header-title h1 {
+    font-size: 1.2rem;
+  }
+  
+  .header-nav {
+    gap: 0.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .theme-toggle {
+    padding: 0.4rem;
+    margin-left: 0.25rem;
+  }
+  
+  .main-content {
+    padding: 1rem 0.5rem 2rem;
+  }
+  
+  .documentation-iframe {
+    height: calc(100vh - 150px);
+  }
 } 
