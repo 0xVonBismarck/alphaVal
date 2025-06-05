@@ -9,5 +9,15 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "version": 2,
+  "routes": [
+    {
+      "src": "/alphaVal.md",
+      "headers": {
+        "Content-Type": "text/markdown",
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
   ]
 } 
