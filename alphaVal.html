@@ -11,8 +11,6 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
     ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
       font-size: inherit;
@@ -20,16 +18,33 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    nav.docs-nav {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+    }
+    .docs-nav a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      background: #f0f0f0;
+      color: #333;
+    }
+    .docs-nav a:hover {
+      background: #e0e0e0;
+    }
+    body {
+      padding-top: 3rem;
+    }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
-  <script
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
-  type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">Alpha Token Supply Documentation</h1>
-</header>
+<nav class="docs-nav">
+  <a href="#" onclick="return false;">Docs</a>
+</nav>
 <h1 id="bittensor-subnet-valuation-framework"><strong>Bittensor Subnet
 Valuation Framework</strong></h1>
 <hr />
@@ -466,4 +481,4 @@ this framework does not provide a definitive final answer on valuation,
 but rather a range of fair values that can be used to influence a final
 allocation decision.</p>
 </body>
-</html>
+</html> 
