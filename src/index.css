@@ -41,8 +41,16 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* App Container */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Header Styles */
 .app-header {
+  width: 100%;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   box-shadow: 0 2px 4px var(--shadow-light);
@@ -129,6 +137,7 @@ body {
 
 /* Main Content */
 .main-content {
+  width: 100%;
   padding: 2rem 1rem 3rem;
 }
 
