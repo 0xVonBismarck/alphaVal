@@ -1,42 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const InputForm = ({ onCalculate }) => {
-  const [inputs, setInputs] = useState({
-    s0: 500000,
-    sigma: 1.5,
-    beta_m: 0.25,
-    br: 0.02,
-    bx: 0,
-    delta_tau: 1,
-    alpha_launch_date: '2025-02-13',
-    halving_date: '2026-03-01',
-    horizon_date: '2026-12-31',
-  })
-
+const InputForm = ({ inputs, onInputChange }) => {
   const handleChange = (e) => {
     const { name, value, type } = e.target
-    setInputs(prev => ({
-      ...prev,
-      [name]: type === 'number' ? parseFloat(value) || 0 : value
-    }))
-  }
-
-  const handleSubmit = () => {
-    if (!inputs.halving_date || !inputs.horizon_date || !inputs.alpha_launch_date) {
-      alert('Please choose the alpha launch date, next TAO halving date, and the projection horizon date.')
-      return
+    const newInputs = {
+      ...inputs,
+      [name]: type === 'number' || type === 'range' ? parseFloat(value) || 0 : value
     }
-
-    const horizonDate = new Date(inputs.horizon_date)
-    const startDate = new Date()
-    startDate.setHours(0, 0, 0, 0)
-
-    if (horizonDate <= startDate) {
-      alert('Horizon date must be in the future.')
-      return
-    }
-
-    onCalculate(inputs)
+    onInputChange(newInputs)
   }
 
   return (
@@ -55,27 +26,27 @@ const InputForm = ({ onCalculate }) => {
         </div>
         
         <div className="field">
-          <label htmlFor="sigma">Average Σ = ∑ prices:</label>
+          <label htmlFor="sigma">Average Σ = ∑ prices: {inputs.sigma}</label>
           <input
-            type="number"
+            type="range"
             name="sigma"
-            step="0.01"
+            min="0"
+            max="5"
+            step="0.1"
             value={inputs.sigma}
-            min="1"
-            max="2"
             onChange={handleChange}
           />
         </div>
         
         <div className="field">
-          <label htmlFor="beta_m">Miner burn fraction βₘ (0–1):</label>
+          <label htmlFor="beta_m">Miner burn fraction βₘ: {inputs.beta_m}</label>
           <input
-            type="number"
+            type="range"
             name="beta_m"
-            step="0.01"
-            value={inputs.beta_m}
             min="0"
             max="1"
+            step="0.01"
+            value={inputs.beta_m}
             onChange={handleChange}
           />
         </div>
@@ -145,10 +116,6 @@ const InputForm = ({ onCalculate }) => {
             onChange={handleChange}
           />
         </div>
-        
-        <button type="button" className="calculate-btn" onClick={handleSubmit}>
-          Calculate
-        </button>
       </div>
     </section>
   )
