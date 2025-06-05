@@ -129,7 +129,7 @@ body {
 
 /* Main Content */
 .main-content {
-  padding: 2rem 0.5rem 3rem;
+  padding: 2rem 1rem 3rem;
 }
 
 /* Documentation Styles */
@@ -152,8 +152,8 @@ body {
 
 /* Calculator Styles */
 .calculator {
-  width: 100%;
-  margin: 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -164,8 +164,8 @@ h1 {
 }
 
 .controls {
-  width: 100%;
-  margin: 0 0 2rem 0;
+  max-width: 900px;
+  margin: 0 auto 2rem;
   background: var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 8px;
@@ -271,8 +271,8 @@ h1 {
 }
 
 .chart-section {
-  width: 100%;
-  margin: 0;
+  max-width: 900px;
+  margin: 0 auto;
   background: var(--bg-secondary);
   padding: 1rem;
   border-radius: 8px;
