@@ -21,7 +21,7 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!alphaVal\\.md|assets/).*)",
       "destination": "/index.html"
     }
   ]
