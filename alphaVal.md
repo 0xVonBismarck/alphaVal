@@ -1,188 +1,154 @@
-# Bittensor Subnet Valuation Framework  
-*Revised 4 June 2025*
+# **Bittensor Subnet Valuation Framework**
 
 ---
 
-## 1 Introduction
-This memorandum develops an analytical framework for valuing Bittensor subnets.  
-The treatment combines  
+## 1 Executive summary
 
-1. hardware operating expenditure,  
-2. user-generated cash-flows,  
-3. peer financing benchmarks, and  
-4. the token-supply mechanics dictated by Dynamic TAO (dTAO).  
-
-All monetary figures are stated in United States dollars (USD) unless noted; all present-value calculations employ a **20 percent** discount rate (denoted $d = 0.20$).
+This framework combines token‑economic mechanics unique to Bittensor with standard venture heuristics to bracket a fair value range for any early‑stage subnet by identifying the floor valuation, the market upside and the sentiment  anchor while adjusting the valuation by a supply anchor.
 
 ---
 
-## 2 Motivation
+## 2 Motivation
+
 Under Dynamic TAO every subnet's token supply, reward schedule and burn mechanics differ materially from conventional Web 3 projects. Early‑epoch inflation, hardware intensity and the interplay between Alpha prices and TAO halvings complicate standard venture valuation heuristics. A transparent framework is therefore required to:
 
-- benchmark the economic floor for securing a subnet;
-- quantify the upside from prospective user adoption;
-- reconcile token‑supply growth with comparable market valuations; and
-- provide investors a defensible discount or premium when committing off‑chain capital.
+* benchmark the economic floor for securing a subnet;
+* quantify the upside from prospective user adoption;
+* reconcile token‑supply growth with comparable market valuations; and
+* provide investors a defensible discount or premium when committing venture capital.
 
-The sections that follow operationalise these objectives via four complementary lenses.
+This valuation rubric therefore aims to help:
 
----
-
-## 3 Methodological Pillars
-
-| Pillar                     | Captured quantity                                                     | Output symbol |
-| -------------------------- | --------------------------------------------------------------------- | ------------- |
-| Cost-of-Participation      | Net-present cost of running the required mining + validation set       | $NPC_\alpha$ |
-| Net-Present Value of Users | Discounted profit stream from end users                                | $NPVU_\alpha$ |
-| Comparable-Deals Benchmark | Median post-money valuations from 313 decentralised-AI financings      | $V_{\text{market}}$ |
-| Inflation Anchoring        | Circulating Alpha at investor horizon $T$                            | $S_{\max}(T),\,S_{\min}(T)$ |
-
-Here $S_{\max}(T)$ and $S_{\min}(T)$ denote, respectively, the cumulative Alpha under maximal and minimal issuance (derived in Section&nbsp;6).
+* **Founders** — justify raises without over‑ or under‑diluting.
+* **Investors** — price risk amid moving issuance, burns and hardware costs.
 
 ---
 
-## 4 Cost-of-Participation (CoP)
+## 3 Methodology overview
 
-### 4.1 Per-node operating expenditure  
-(The table below assumes a power price of 0.12 USD kWh⁻¹ and PUE = 1.2.)
+| Pillar             | What it measures                                             | Output           |
+| ------------------ | ------------------------------------------------------------ | ---------------- |
+| **(i) CoP**        | Net‑present cost to operate all required miners + validators | Floor valuation  |
+| **(ii) NPVU**      | Discounted cash‑flow from end‑users (ARPU × users)           | Market upside    |
+| **(iii) Comps**    | Comparable AI/Web3 deal valuations        | Sentiment‑anchor |
+| **(iv) Inflation** | Max/min circulating Alpha at investor horizon                | Supply‑anchor    |
 
-| Hardware profile | Cap-ex $ day⁻¹ ¹ | Power $ day⁻¹ ² | **Total $ day⁻¹** |
-| ---------------- | --------------- | --------------- | ----------------- |
-| CPU only         | 2.00            | 1.20            | **3.20** |
-| 8 × RTX 4090     | 25.00           | 18.00           | **43.00** |
-| 8 × A100         | 64.00           | 22.00           | **86.00** |
-| 8 × H200         | 90.00           | 25.00           | **115.00** |
+### 3.1 Cost‑of‑Participation (CoP) — economic floor
 
-<sup>1</sup> Five-year straight-line depreciation, 12 % cost of capital.  
-<sup>2</sup> Operating electricity cost.
+The CoP quantifies the minimum rational valuation at which miners and validators will continue to participate. Should a subnet trade below this level, rational operators will redirect resources to more profitable alternatives.
 
-### 4.2 Subnet-level expenditure and present value  
+#### 3.1.1 Daily OPEX examples
 
-Let  
+| Spec (per node)                                               | Capex \$ day\* | Power \$ day† | **Total \$ day** |
+| ------------------------------------------------------------- | ----------------- | --------------- | ------------------ |
+| CPU only                                                      | 2.00              | 1.20            | **3.20**           |
+| 8 × RTX 4090                                                  | 25.00             | 18.00           | **43.00**          |
+| 8 × A100                                                      | 64.00             | 22.00           | **86.00**          |
+| 8 × H200                                                      | 90.00             | 25.00           | **115.00**         |
 
-* $N$ = miner-node count, $N_v$ = validator-node count;  
-* $M$ and $V$ = per-node daily costs from Table 4.1;  
-* $K\ge1$ = labour-complexity multiplier (baseline 1.0);  
-* $P_\alpha$ = spot price of the subnet's Alpha token.
+_<sup>*</sup> Five-year straight-line depreciation, 12 % cost of capital._  
+_<sup>†</sup> Operating electricity cost._
 
-Daily burn (USD)  
+#### 3.1.2 Formula
 
-$$
-C = 365.25K(NM + N_vV).
-$$
+Let 
 
-Present value (USD)  
+* *$N_{m}$* = miner‑node count, *$N_{v}$* = validator‑node count
+* *$M$*, *$V$* = per‑node daily costs from Table 3.1
+* *K ≥ 1* = labour‑complexity multiplier (baseline 1.0)
+* *P\*\*α* = spot price of the subnet’s Alpha token
 
-$$
-\mathrm{NPC}_{\text{USD}} = \frac{C}{d}.
-$$
-
-Converted to Alpha  
+Annual burn (USD)
 
 $$
-\boxed{\mathrm{NPC}_{\alpha} = \frac{C}{d\,P_\alpha}}.
+C = 365.25\,K\bigl(N_{m}\,M + N_{v}\,V\bigr) \tag{3.1}
+$$
+
+Present value (USD)
+
+$$
+\boxed{\text{NPC}_{\text{USD}} = \dfrac{C}{d}} \tag{3.2}
 $$
 
 ---
 
-## 5 Net-Present Value of User Cash-Flows (NPVU)
+### 3.2 Net‑Present Value of Users (NPVU) — demand upside
 
-Let  
-
-* $U$ = steady-state active user count,  
-* $\text{ARPU}$ = average revenue per user per year (USD).
-
-Perpetuity (USD)  
+Given steady‑state users *U* and average revenue per user **ARPU** (USD),
 
 $$
-\mathrm{NPVU}_{\text{USD}} = \frac{U\;\text{ARPU}}{d}.
+\boxed{\text{NPVU} = \dfrac{U\,\text{ARPU}}{d}} \tag{3.3}
 $$
 
-Finite horizon $T$ years  
+For a finite horizon *T* years
 
 $$
-\mathrm{NPVU}_{T,\text{USD}} = U\,\text{ARPU}\,\frac{1-(1+d)^{-T}}{d}.
+\text{NPVU}_T = U\,\text{ARPU}\,\frac{1 - (1+d)^{-T}}{d} \tag{3.4}
 $$
-
-After division by $P_\alpha$ the result is $NPVU_\alpha$.
 
 ---
 
-## 6 Comparable-Deals Benchmark  
+### 3.3 Comparable‑deals benchmark
 
-| Stage     | Median valuation (USD M) | Observations | IQR (25–75 %) |
-|-----------|--------------------------|--------------|---------------|
-| Pre-Seed  | 20   | 57  | 10 – 30 |
-| Seed      | 26.8 | 156 | 15 – 50 |
-| Strategic | 50   | 34  | 26 – 75 |
-| Private   | 44   | 64  | 21 – 72 |
-| Series A  | 125  | 2   | 113 – 138 |
+Key VC questions—product‑market fit, go‑to‑market, burn and roadmap—determine where a subnet fits on the deal curve.
+
+| **Round**     | Avg Raise  | Avg Valuation | Q1    | **Median** | Q3    | Deals |
+| ------------- | ---------- | ------------- | ----- | ---------- | ----- | ----- |
+| **Pre‑Seed**  |  \$ 2.60 M |  \$ 28.6 M    | 10 M  | **20 M**   | 30 M  |  57   |
+| **Seed**      |  \$ 5.05 M |  \$ 47.2 M    | 15 M  | **26.8 M** | 50 M  |  156  |
+| **Strategic** |  \$ 4.44 M |  \$ 66.0 M    | 26 M  | **50 M**   | 75 M  |  34   |
+| **Private**   |  \$ 5.83 M |  \$ 71.4 M    | 21 M  | **44 M**   | 72 M  |  64   |
+| **Series A**  |  \$ 4.50 M |  \$ 125 M     | 113 M | **125 M**  | 138 M |  2    |
 
 ---
 
-## 7 Token-Supply Dynamics  
+### 3.4 Inflation analysis — supply anchor
 
-### 7.1 Maximum per-block issuance  
-
-Let  
-
-* $\Delta\tau$ = TAO minted per base-chain block,  
-* $\sum_{j}p_{j}$ = cross-subnet price sum (empirically 1–2, baseline 1.5),  
-* $\overline{\Delta\alpha_{i}}$ = subnet-specific hard cap on Alpha issuance.
+#### 3.4.1 Maximum issuance per block
 
 $$
-\delta_1 = \frac{\Delta \tau}{\sum_{j} p_{j}},\quad
-\delta_2 = \overline{\Delta\alpha_{i}},\quad
-\delta   = \min(\delta_1,\delta_2).
+\delta = \min\!\Bigl(\tfrac{\Delta\tau}{\sum_j p_j},\; \overline{\Delta\alpha_i}\Bigr) \tag{3.5}
 $$
 
-Maximum issuance  
-
 $$
-\boxed{\Delta\alpha_{\max} = 2\,\delta}.
+\boxed{\Delta\alpha_{\max} = 2\,\delta} \tag{3.6}
 $$
 
-### 7.2 Minimum net issuance  
-
-Define  
-
-* $\beta_m$ = fraction of miners' reward (0.41 δ) immediately burned,  
-* $B_r,\,B_x$ = registration and external burns (Alpha block⁻¹).
+#### 3.4.2 Minimum net issuance
 
 $$
-\boxed{\Delta\alpha_{\min} =
-       2\,\delta -
-       \bigl[\beta_m\,(0.41)\,\delta + B_r + B_x\bigr]}.
+\boxed{\Delta\alpha_{\min} = 2\,\delta - \bigl[\beta_{m}(0.41)\,\delta + B_{r} + B_{x}\bigr] \tag{3.7}}
 $$
 
-### 7.3 Cumulative supply up to horizon *T*  
+Here $\beta_{m}$ is the miner‑burn fraction, $B_{r}$ the per‑block registration burn, and $B_{x}$ any additional external burn (read revenues).
+
+#### 3.4.3 Cumulative supply up to horizon $T$
 
 Let $t_0$ be subnet genesis; integrate over time $t$:
 
 $$
 S_{\max}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\max}(t)\,\mathrm{d}t,
 \qquad
-S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t.
+S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t \tag{3.8}
 $$
 
 Numerical evaluation is implemented in the companion calculator.
 
----
 
-## 8 Estimating Future Circulating Supply  
+#### 3.4.4 Estimating Future Circulating Supply
 
-To estimate the circulating Alpha at a future date $T$ the investor specifies:
+To project the circulating Alpha at a future date ($T$) you must specify:
 
 | Required input | Symbol | Comment |
 |----------------|--------|---------|
 | Existing circulating supply (today) | $S_0$ | as on-chain |
 | Average sum-of-prices $\langle\sum p\rangle$ | $\Sigma$ | choose within 1 – 2 |
 | Miner-burn fraction | $\beta_m$ | 0 – 1 |
-| Registration burn / block | $B_r$ | Alpha block⁻¹ |
-| External burn / block | $B_x$ | Alpha block⁻¹ |
+| Registration burn / block | $B_r$ | daily burn / 7,200 |
+| External burn / block | $B_x$ | daily burn / 7,200 |
 | Next TAO-halving date | $T_h$ | calendar date |
 
-### 8.1 Block-level issuance across a halving boundary  
+#### 3.4.5 Block-level issuance across a halving boundary  
 
 Let
 
@@ -199,36 +165,36 @@ $$
 \begin{cases}
 \Delta\tau_{\text{current}}, & k=1 \\
 \frac{1}{2}\,\Delta\tau_{\text{current}}, & k=2
-\end{cases}
+\end{cases}\tag{3.9}
 $$
 
 Compute the per-block limit  
 
 $$
 \delta^{(k)} = \min\!\Bigl(\tfrac{\Delta\tau^{(k)}}{\Sigma},
-                           \overline{\Delta\alpha_{i}}\Bigr).
+                           \overline{\Delta\alpha_{i}}\Bigr)\tag{3.10}
 $$
 
-### 8.2 Net Alpha minted in each segment  
+#### 3.4.6 Net Alpha minted in each segment  
 
 Net per block  
 
 $$
 \Delta\alpha_{\text{net}}^{(k)} =
   2\,\delta^{(k)} -
-  \bigl[\beta_m\,(0.41)\,\delta^{(k)} + B_r + B_x\bigr].
+  \bigl[\beta_m\,(0.41)\,\delta^{(k)} + B_r + B_x\bigr]\tag{3.11}
 $$
 
 Total minted  
 
 $$
-M^{(k)} = 7\,200 \times D_k \times \Delta\alpha_{\text{net}}^{(k)}.
+M^{(k)} = 7\,200 \times D_k \times \Delta\alpha_{\text{net}}^{(k)}\tag{3.12}
 $$
 
-### 8.3 Projected circulating supply at $T$
+#### 3.4.7 Projected circulating supply at $T$
 
 $$
-\boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}.
+\boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}\tag{3.13}
 $$
 
 > **Worked example**  
@@ -241,6 +207,34 @@ $$
 
 ---
 
-## 9 Conclusion
-The framework now enables a practitioner to project circulating supply directly from observable burns, price aggregates and halving timing, then embed that projection into cost-, demand- and market-based valuation bounds.  
-All variables are defined locally at first use to minimise cross-reference latency; numerical examples are readily reproduced with the associated calculator.
+## 4 Synthesising a valuation range
+
+Combining the above methods allows a price range to be generated, specific assumptions can be refined on the supply scales to narrow the range. 
+
+1. Floor = NPC.
+2. Ceiling = NPVU + strategic premium.
+3. Scale by forecast supply at horizon *T*.
+4. Apply illiquidity discount \$\lambda\$ (20–40 %).
+
+$$
+\text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\; \tfrac{\text{NPVU}+\text{Premium}}{S_{\min}(T)}\Bigr] (1-\lambda). \tag{4.1}
+$$
+
+---
+
+## 5 Caveats & sensitivity levers
+
+Below are the key caveats and sensitivity levers that have not been applied in this simplified model. It is important to mention that the circulating supply estimates should act as a reference but not the absolute truth.
+
+| Factor                 | Base assumption | Stress‑test example          |
+| ---------------------- | --------------- | ---------------------------- |
+| Σ price path           | Flat            | ±100 % trajectories          |
+| TAO halving delay      | None            | Recycling‑driven shift       |
+| Token‑holder behaviour | Passive         | Simulated supply shocks      |
+| Staking                | Ignored         | Estimated per‑subnet staking |
+
+---
+
+## 6 Conclusion
+
+This framework is intended to serve as a general guide to influence valuation decisions, however, as valuation is more an art than science, this framework does not provide a definitive final answer on valuation, but rather a range of fair values that can be used to influence a final allocation decision. Lastly, it is important to highlight that this valuation methodology only works as a starting point for long term venture investors looking to invest into subnets.

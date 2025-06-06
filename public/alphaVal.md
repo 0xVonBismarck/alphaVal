@@ -35,7 +35,7 @@ This valuation rubric therefore aims to help:
 
 ### 3.1 Cost‑of‑Participation (CoP) — economic floor
 
-The CoP quantifies the minimum rational valuation at which miners and validators will continue to participate. Should a subnet trade below this level, rational operators will redirect resources to more profitable alternatives.
+The CoP quantifies the minimum rational valuation at which miners and validators will continue to participate. Should a subnet trade below this level, rational operators will redirect resources to more profitable alternatives. This should represent the floor of the valuation range. 
 
 #### 3.1.1 Daily OPEX examples
 
@@ -73,7 +73,9 @@ $$
 ---
 
 ### 3.2 Net‑Present Value of Users (NPVU) — demand upside
+The NPVU identifies the potential value of the subnets outputs by proxying what an average user of the subnet would be willing to pay to access it. If this falls below the the CoP identified above, a subnet is not economically viable. This should form as the upside bracket in the fair valuation range.
 
+#### 3.2.1 Formula
 Given steady‑state users *U* and average revenue per user **ARPU** (USD),
 
 $$
@@ -90,19 +92,21 @@ $$
 
 ### 3.3 Comparable‑deals benchmark
 
-Key VC questions—product‑market fit, go‑to‑market, burn and roadmap—determine where a subnet fits on the deal curve.
+Assess the subnet like any other project on another network. Ask key VC questions—product‑market fit, go‑to‑market, team size, burn and roadmap—determine where a subnet fits on the deal curve. This metric will also highlight whether or not there is a premium or discount associated with Bittensor that investors need to be aware of. Comparables will also allow investors to identify specific market upswings or downswings depending on timing. The table below shows the average raise, valuation for deals of different stages.
 
-| **Round**     | Avg Raise  | Avg Valuation | Q1    | **Median** | Q3    | Deals |
+| Round     | Avg Raise  | Avg Valuation | Q1    | **Median** | Q3    | Deals |
 | ------------- | ---------- | ------------- | ----- | ---------- | ----- | ----- |
-| **Pre‑Seed**  |  \$ 2.60 M |  \$ 28.6 M    | 10 M  | **20 M**   | 30 M  |  57   |
-| **Seed**      |  \$ 5.05 M |  \$ 47.2 M    | 15 M  | **26.8 M** | 50 M  |  156  |
-| **Strategic** |  \$ 4.44 M |  \$ 66.0 M    | 26 M  | **50 M**   | 75 M  |  34   |
-| **Private**   |  \$ 5.83 M |  \$ 71.4 M    | 21 M  | **44 M**   | 72 M  |  64   |
-| **Series A**  |  \$ 4.50 M |  \$ 125 M     | 113 M | **125 M**  | 138 M |  2    |
+| Pre‑Seed  |  \$ 2.60 M |  \$ 28.6 M    | 10 M  | **20 M**   | 30 M  |  57   |
+| Seed      |  \$ 5.05 M |  \$ 47.2 M    | 15 M  | **26.8 M** | 50 M  |  156  |
+| Strategic |  \$ 4.44 M |  \$ 66.0 M    | 26 M  | **50 M**   | 75 M  |  34   |
+| Private   |  \$ 5.83 M |  \$ 71.4 M    | 21 M  | **44 M**   | 72 M  |  64   |
+| Series A  |  \$ 4.50 M |  \$ 125 M     | 113 M | **125 M**  | 138 M |  2    |
 
 ---
 
 ### 3.4 Inflation analysis — supply anchor
+With the three valuation benchmarks identified, it is necessary to convert this to a per token price so that it can be marked against the current token price in Bittensor. To do so, a circulating supply $S$, at a point in time $T$, must be estimated. $T$ should be far enough in the future such that the target circulating supply can be used similarly to the max supply when calculating FDV in other Web3 projects. Rather than trying to perfectly solve for a circulating supply, it can be brackted by identifying the maximum inlation rate curve, $\ \Delta\alpha_{\max}$ and a theoretical minimum inflation curve $\ \Delta\alpha_{\min}$. 
+
 
 #### 3.4.1 Maximum issuance per block
 
@@ -213,8 +217,9 @@ Combining the above methods allows a price range to be generated, specific assum
 
 1. Floor = NPC.
 2. Ceiling = NPVU + strategic premium.
-3. Scale by forecast supply at horizon *T*.
-4. Apply illiquidity discount \$\lambda\$ (20–40 %).
+3. Comps = Market Price
+4. Scale by forecast supply at horizon *T*.
+5. Apply illiquidity discount \$\lambda\$ (20–40 %).
 
 $$
 \text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\; \tfrac{\text{NPVU}+\text{Premium}}{S_{\min}(T)}\Bigr] (1-\lambda). \tag{4.1}
