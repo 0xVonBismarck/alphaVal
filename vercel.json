@@ -4,29 +4,25 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "vite",
+  "headers": [
+    {
+      "source": "/alphaVal.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "version": 2,
-  "routes": [
-    {
-      "src": "/docs.html",
-      "dest": "/docs.html"
-    },
-    {
-      "src": "/alphaVal.md",
-      "headers": {
-        "Content-Type": "text/markdown",
-        "Access-Control-Allow-Origin": "*"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
     }
   ]
 } 
