@@ -21,7 +21,8 @@
       "headers": {
         "Content-Type": "text/markdown",
         "Access-Control-Allow-Origin": "*"
-      }
+      },
+      "continue": true
     },
     {
       "src": "/(.*)",

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Alpha Token Supply Documentation</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 1em auto;}
+    table { width: 100%; margin: 1em 0; border-collapse: collapse; }
+    th, td { padding: 0.5em; border: 1px solid #ddd; }
+    body { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        packages: {'[+]': ['ams', 'mathtools']},
+        tags: 'ams',
+        tagSide: 'right'
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Alpha Token Supply Documentation</h1>
+</header>
+<h1 id="bittensor-subnet-valuation-framework"><strong>Bittensor Subnet
+Valuation Framework</strong></h1>
+<hr />
+<h2 id="executive-summary">1 Executive summary</h2>
+<p>This framework combines token‑economic mechanics unique to Bittensor
+with standard venture heuristics to bracket a fair value range for any
+early‑stage subnet by identifying the floor valuation, the market upside
+and the sentiment anchor while adjusting the valuation by a supply
+anchor.</p>
+<hr />
+<h2 id="motivation">2 Motivation</h2>
+<p>Under Dynamic TAO every subnet's token supply, reward schedule and
+burn mechanics differ materially from conventional Web 3 projects.
+Early‑epoch inflation, hardware intensity and the interplay between
+Alpha prices and TAO halvings complicate standard venture valuation
+heuristics. A transparent framework is therefore required to:</p>
+<ul>
+<li>benchmark the economic floor for securing a subnet;</li>
+<li>quantify the upside from prospective user adoption;</li>
+<li>reconcile token‑supply growth with comparable market valuations;
+and</li>
+<li>provide investors a defensible discount or premium when committing
+venture capital.</li>
+</ul>
+<p>This valuation rubric therefore aims to help:</p>
+<ul>
+<li><strong>Founders</strong> — justify raises without over‑ or
+under‑diluting.</li>
+<li><strong>Investors</strong> — price risk amid moving issuance, burns
+and hardware costs.</li>
+</ul>
+<hr />
+<h2 id="methodology-overview">3 Methodology overview</h2>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 63%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>What it measures</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(i) CoP</strong></td>
+<td>Net‑present cost to operate all required miners + validators</td>
+<td>Floor valuation</td>
+</tr>
+<tr>
+<td><strong>(ii) NPVU</strong></td>
+<td>Discounted cash‑flow from end‑users (ARPU × users)</td>
+<td>Market upside</td>
+</tr>
+<tr>
+<td><strong>(iii) Comps</strong></td>
+<td>Comparable AI/Web3 deal valuations (313‑round dataset)</td>
+<td>Sentiment‑anchor</td>
+</tr>
+<tr>
+<td><strong>(iv) Inflation</strong></td>
+<td>Max/min circulating Alpha at investor horizon</td>
+<td>Supply‑anchor</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="costofparticipation-cop-economic-floor">3.1 Cost‑of‑Participation
+(CoP) — economic floor</h3>
+<p>The CoP quantifies the minimum rational valuation at which miners and
+validators will continue to participate. Should a subnet trade below
+this level, rational operators will redirect resources to more
+profitable alternatives.</p>
+<h4 id="daily-opex-examples">3.1.1 Daily OPEX examples</h4>
+<table>
+<colgroup>
+<col style="width: 54%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Spec (per node)</th>
+<th>Cap‑ex $ day⁻¹*</th>
+<th>Power $ day⁻¹†</th>
+<th><strong>Total $ day⁻¹</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU only</td>
+<td>2.00</td>
+<td>1.20</td>
+<td><strong>3.20</strong></td>
+</tr>
+<tr>
+<td>8 × RTX 4090</td>
+<td>25.00</td>
+<td>18.00</td>
+<td><strong>43.00</strong></td>
+</tr>
+<tr>
+<td>8 × A100</td>
+<td>64.00</td>
+<td>22.00</td>
+<td><strong>86.00</strong></td>
+</tr>
+<tr>
+<td>8 × H200</td>
+<td>90.00</td>
+<td>25.00</td>
+<td><strong>115.00</strong></td>
+</tr>
+<tr>
+<td><em>Five‑year straight‑line depreciation + 12 % financing
+cost.</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>†Electricity 0.12 USD kWh⁻¹, PUE = 1.2.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="formula">3.1.2 Formula</h4>
+<p>Let </p>
+<p>* <em>N</em> = miner‑node count, <em>N**v</em> = validator‑node count
+* <em>M</em>, <em>V</em> = per‑node daily costs from Table 3.1
+* <em>K ≥ 1</em> = labour‑complexity multiplier (baseline 1.0)
+* <em>P**α</em> = spot price of the subnet's Alpha token</p>
+<p>Daily burn (USD)</p>
+<p><span class="math display">\[
+C = 365.25\,K\bigl(N\,M + N_{v}\,V\bigr) \tag{3.1}
+\]</span></p>
+<p>Present value (USD)</p>
+<p><span class="math display">\[
+\boxed{\text{NPC}_{\text{USD}} = \frac{C}{d}}. \tag{3.2}
+\]</span></p>
+<hr />
+<h3 id="netpresent-value-of-users-npvu-demand-upside">3.2 Net‑Present Value of Users (NPVU) — demand upside</h3>
+<p>Given steady‑state users <em>U</em> and average revenue per
+user <strong>ARPU</strong> (USD),</p>
+<p><span class="math display">\[
+\boxed{\text{NPVU} = \frac{U\,\text{ARPU}}{d}}. \tag{3.3}
+\]</span></p>
+<p>For a finite horizon <em>T</em> years</p>
+<p><span class="math display">\[
+\text{NPVU}_T = U\,\text{ARPU}\,\frac{1 - (1+d)^{-T}}{d}. \tag{3.4}
+\]</span></p>
+<hr />
+<h3 id="comparabledeals-benchmark">3.3 Comparable‑deals benchmark</h3>
+<p>Key VC questions—product‑market fit, go‑to‑market, burn and
+roadmap—determine where a subnet fits on the deal curve.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 16%" />
+<col style="width: 21%" />
+<col style="width: 8%" />
+<col style="width: 16%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Round</strong></th>
+<th>Avg Raise</th>
+<th>Avg Valuation</th>
+<th>Q1</th>
+<th><strong>Median</strong></th>
+<th>Q3</th>
+<th>Deals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pre‑Seed</strong></td>
+<td> $ 2.60 M</td>
+<td> $ 28.6 M</td>
+<td>10 M</td>
+<td><strong>20 M</strong></td>
+<td>30 M</td>
+<td> 57</td>
+</tr>
+<tr>
+<td><strong>Seed</strong></td>
+<td> $ 5.05 M</td>
+<td> $ 47.2 M</td>
+<td>15 M</td>
+<td><strong>26.8 M</strong></td>
+<td>50 M</td>
+<td> 156</td>
+</tr>
+<tr>
+<td><strong>Strategic</strong></td>
+<td> $ 4.44 M</td>
+<td> $ 66.0 M</td>
+<td>26 M</td>
+<td><strong>50 M</strong></td>
+<td>75 M</td>
+<td> 34</td>
+</tr>
+<tr>
+<td><strong>Private</strong></td>
+<td> $ 5.83 M</td>
+<td> $ 71.4 M</td>
+<td>21 M</td>
+<td><strong>44 M</strong></td>
+<td>72 M</td>
+<td> 64</td>
+</tr>
+<tr>
+<td><strong>Series A</strong></td>
+<td> $ 4.50 M</td>
+<td> $ 125 M</td>
+<td>113 M</td>
+<td><strong>125 M</strong></td>
+<td>138 M</td>
+<td> 2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="inflation-analysis-supply-anchor">3.4 Inflation analysis —
+supply anchor</h3>
+<h4 id="maximum-issuance-per-block">3.4.1 Maximum issuance per
+block</h4>
+<p><span class="math display">\[
+\delta = \min\!\left(\frac{\Delta\tau}{\sum_j p_j},\; \overline{\Delta\alpha_i}\right) \tag{3.5}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\Delta\alpha_{\max} = 2\,\delta}. \tag{3.6}
+\]</span></p>
+<h4 id="minimum-net-issuance">3.4.2 Minimum net issuance</h4>
+<p><span class="math display">\[
+\boxed{\Delta\alpha_{\min} = 2\,\delta - \bigl[\beta_{m}(0.41)\,\delta +
+B_{r} + B_{x}\bigr] \tag{3.7}}
+\]</span></p>
+<p>Here <span class="math inline">\(\beta_{m}\)</span> is the miner‑burn
+fraction, <span class="math inline">\(B_{r}\)</span> the per‑block
+registration burn, and <span class="math inline">\(B_{x}\)</span> any
+additional external burn (read revenues).</p>
+<h4 id="cumulative-supply-up-to-horizon-t">3.4.3 Cumulative supply up to
+horizon <span class="math inline">\(T\)</span></h4>
+<p>Let <span class="math inline">\(t_0\)</span> be subnet genesis;
+integrate over time <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+S_{\max}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\max}(t)\,\mathrm{d}t,
+\qquad
+S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t
+\]</span></p>
+<p>Numerical evaluation is implemented in the companion calculator.</p>
+<h4 id="estimating-future-circulating-supply">3.4.4 Estimating Future
+Circulating Supply</h4>
+<p>To project the circulating Alpha at a future date (<span
+class="math inline">\(T\)</span>) you must specify:</p>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 24%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>Required input</th>
+<th>Symbol</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing circulating supply (today)</td>
+<td><span class="math inline">\(S_0\)</span></td>
+<td>as on-chain</td>
+</tr>
+<tr>
+<td>Average sum-of-prices <span class="math inline">\(\langle\sum
+p\rangle\)</span></td>
+<td><span class="math inline">\(\Sigma\)</span></td>
+<td>choose within 1 – 2</td>
+</tr>
+<tr>
+<td>Miner-burn fraction</td>
+<td><span class="math inline">\(\beta_m\)</span></td>
+<td>0 – 1</td>
+</tr>
+<tr>
+<td>Registration burn / block</td>
+<td><span class="math inline">\(B_r\)</span></td>
+<td>daily burn / 7,200</td>
+</tr>
+<tr>
+<td>External burn / block</td>
+<td><span class="math inline">\(B_x\)</span></td>
+<td>daily burn / 7,200</td>
+</tr>
+<tr>
+<td>Next TAO-halving date</td>
+<td><span class="math inline">\(T_h\)</span></td>
+<td>calendar date</td>
+</tr>
+</tbody>
+</table>
+<h5 id="block-level-issuance-across-a-halving-boundary">3.4.4.1
+Block-level issuance across a halving boundary</h5>
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(D = T - t_{\text{now}}\)</span> = days
+until horizon,<br />
+</li>
+<li><span class="math inline">\(D_h\)</span> = days from <em>now</em> to
+the TAO-halving date <span class="math inline">\(T_h\)</span> (clip to 0
+if <span class="math inline">\(T \le T_h\)</span>),<br />
+</li>
+<li>7 200 blocks per day.</li>
+</ul>
+<p>Split the horizon into <strong>Segment 1</strong> (pre-halving, <span
+class="math inline">\(D_1 = \min(D, D_h)\)</span>) and <strong>Segment
+2</strong> (post-halving, <span class="math inline">\(D_2 = D -
+D_1\)</span>).</p>
+<p>For each segment <span class="math inline">\(k\in\{1,2\}\)</span>
+set</p>
+<p><span class="math display">\[
+\Delta\tau^{(k)} =
+\begin{cases}
+\Delta\tau_{\text{current}}, &amp; k=1 \\
+\frac{1}{2}\,\Delta\tau_{\text{current}}, &amp; k=2
+\end{cases}
+\]</span></p>
+<p>Compute the per-block limit</p>
+<p><span class="math display">\[
+\delta^{(k)} = \min\!\Bigl(\tfrac{\Delta\tau^{(k)}}{\Sigma},
+                           \overline{\Delta\alpha_{i}}\Bigr)
+\]</span></p>
+<h3 id="net-alpha-minted-in-each-segment">8.2 Net Alpha minted in each
+segment</h3>
+<p>Net per block</p>
+<p><span class="math display">\[
+\Delta\alpha_{\text{net}}^{(k)} =
+  2\,\delta^{(k)} -
+  \bigl[\beta_m\,(0.41)\,\delta^{(k)} + B_r + B_x\bigr]
+\]</span></p>
+<p>Total minted</p>
+<p><span class="math display">\[
+M^{(k)} = 7\,200 \times D_k \times \Delta\alpha_{\text{net}}^{(k)}
+\]</span></p>
+<h3 id="projected-circulating-supply-at-t">8.3 Projected circulating
+supply at <span class="math inline">\(T\)</span></h3>
+<p><span class="math display">\[
+\boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}
+\]</span></p>
+<blockquote>
+<p><strong>Worked example</strong><br />
+<em>Inputs:</em> <span class="math inline">\(S_0 = 2.5\)</span> M Alpha,
+<span class="math inline">\(\Sigma = 1.5\)</span>, <span
+class="math inline">\(\beta_m = 0.25\)</span>,<br />
+<span class="math inline">\(B_r = 0.02\)</span>, <span
+class="math inline">\(B_x = 0\)</span> Alpha block⁻¹, current <span
+class="math inline">\(\Delta\tau = 1\)</span>,<br />
+TAO halving in 180 days, horizon <span class="math inline">\(T\)</span>
+in 540 days.</p>
+<p>Segment-level calculations yield <span class="math inline">\(M^{(1)}
+\approx 0.47\)</span> M,<br />
+<span class="math inline">\(M^{(2)} \approx 0.18\)</span> M, hence <span
+class="math inline">\(S(T) \approx 3.15\)</span> M Alpha.</p>
+</blockquote>
+<hr />
+<h2 id="synthesising-a-valuation-range">4 Synthesising a valuation
+range</h2>
+<p>Combining the above methods allows a price range to be generated,
+specific assumptions can be refined on the supply scales to narrow the
+range. </p>
+<ol type="1">
+<li>Floor = NPC.</li>
+<li>Ceiling = NPVU + strategic premium.</li>
+<li>Scale by forecast supply at horizon <em>T</em>.</li>
+<li>Apply illiquidity discount $$ (20–40 %).</li>
+</ol>
+<p><span class="math display">\[
+\text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\;
+\tfrac{\text{NPVU}+\text{Premium}}{S_{\min}(T)}\Bigr] (1-\lambda).
+\tag{4.1}
+\]</span></p>
+<hr />
+<h2 id="caveats-sensitivity-levers">5 Caveats &amp; sensitivity
+levers</h2>
+<p>Below are the key caveats and sensitivity levers that have not been
+applied in this simplified model. It is important to mention that the
+circulating supply estimates should act as a reference but not the
+absolute truth.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 23%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Base assumption</th>
+<th>Stress‑test example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Σ price path</td>
+<td>Flat</td>
+<td>±100 % trajectories</td>
+</tr>
+<tr>
+<td>TAO halving delay</td>
+<td>None</td>
+<td>Recycling‑driven shift</td>
+</tr>
+<tr>
+<td>Token‑holder behaviour</td>
+<td>Passive</td>
+<td>Simulated supply shocks</td>
+</tr>
+<tr>
+<td>Staking</td>
+<td>Ignored</td>
+<td>Estimated per‑subnet staking</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="conclusion">6 Conclusion</h2>
+<p>This framework is intended to serve as a general guide to influence
+valuation decisions, however, as valuation is more an art than science,
+this framework does not provide a definitive final answer on valuation,
+but rather a range of fair values that can be used to influence a final
+allocation decision.</p>
+</body>
+</html>
