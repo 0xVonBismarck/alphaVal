@@ -7,6 +7,7 @@
   <title>AlphaVal</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">
@@ -105,27 +106,27 @@
 <p>_<sup>*</sup> Five-year straight-line depreciation, 12 % cost of capital._<br /><em><sup>†</sup> Operating electricity cost.</em></p>
 <h4 id="formula">3.1.2 Formula</h4>
 <p>Let </p>
-<p><em> </em><span class="math"><em>N</em><sub><em>m</em></sub></span><em> = miner‑node count, </em><span class="math"><em>N</em><sub><em>v</em></sub></span><em> = validator‑node count </em> <em><span class="math"><em>M</em></span></em>, <em><span class="math"><em>V</em></span></em> = per‑node daily costs from Table 3.1 <em> </em>K ≥ 1<em> = labour‑complexity multiplier (baseline 1.0) </em> <em>P**α</em> = spot price of the subnet’s Alpha token</p>
+<p><em> </em><span class="math">\(N_{m}\)</span><em> = miner‑node count, </em><span class="math">\(N_{v}\)</span><em> = validator‑node count </em> <em><span class="math">\(M\)</span></em>, <em><span class="math">\(V\)</span></em> = per‑node daily costs from Table 3.1 <em> </em>K ≥ 1<em> = labour‑complexity multiplier (baseline 1.0) </em> <em>P**α</em> = spot price of the subnet’s Alpha token</p>
 <p>Annual burn (USD)</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 C = 365.25\,K\bigl(N_{m}\,M + N_{v}\,V\bigr) \tag{3.1}
-$$</span><br /></p>
+\]</span></p>
 <p>Present value (USD)</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \boxed{\text{NPC}_{\text{USD}} = \dfrac{C}{d}} \tag{3.2}
-$$</span><br /></p>
+\]</span></p>
 <hr />
 <h3 id="netpresent-value-of-usersnpvu-demand-upside">3.2 Net‑Present Value of Users (NPVU) — demand upside</h3>
 <p>The NPVU identifies the potential value of the subnets outputs by proxying what an average user of the subnet would be willing to pay to access it. If this falls below the the CoP identified above, a subnet is not economically viable. This should form as the upside bracket in the fair valuation range.</p>
 <h4 id="formula-1">3.2.1 Formula</h4>
 <p>Given steady‑state users <em>U</em> and average revenue per user <strong>ARPU</strong> (USD),</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \boxed{\text{NPVU} = \dfrac{U\,\text{ARPU}}{d}} \tag{3.3}
-$$</span><br /></p>
+\]</span></p>
 <p>For a finite horizon <em>T</em> years</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \text{NPVU}_T = U\,\text{ARPU}\,\frac{1 - (1+d)^{-T}}{d} \tag{3.4}
-$$</span><br /></p>
+\]</span></p>
 <hr />
 <h3 id="comparabledeals-benchmark">3.3 Comparable‑deals benchmark</h3>
 <p>Assess the subnet like any other project on another network. Ask key VC questions—product‑market fit, go‑to‑market, team size, burn and roadmap—determine where a subnet fits on the deal curve. This metric will also highlight whether or not there is a premium or discount associated with Bittensor that investors need to be aware of. Comparables will also allow investors to identify specific market upswings or downswings depending on timing. The table below shows the average raise, valuation for deals of different stages.</p>
@@ -191,29 +192,29 @@ $$</span><br /></p>
 </table>
 <hr />
 <h3 id="inflation-analysis-supply-anchor">3.4 Inflation analysis — supply anchor</h3>
-<p>With the three valuation benchmarks identified, it is necessary to convert this to a per token price so that it can be marked against the current token price in Bittensor. To do so, a circulating supply <span class="math"><em>S</em></span>, at a point in time <span class="math"><em>T</em></span>, must be estimated. <span class="math"><em>T</em></span> should be far enough in the future such that the target circulating supply can be used similarly to the max supply when calculating FDV in other Web3 projects. Rather than trying to perfectly solve for a circulating supply, it can be brackted by identifying the maximum inlation rate curve, <span class="math"> Δ<em>α</em><sub>max</sub></span> and a theoretical minimum inflation curve <span class="math"> Δ<em>α</em><sub>min</sub></span>.</p>
+<p>With the three valuation benchmarks identified, it is necessary to convert this to a per token price so that it can be marked against the current token price in Bittensor. To do so, a circulating supply <span class="math">\(S\)</span>, at a point in time <span class="math">\(T\)</span>, must be estimated. <span class="math">\(T\)</span> should be far enough in the future such that the target circulating supply can be used similarly to the max supply when calculating FDV in other Web3 projects. Rather than trying to perfectly solve for a circulating supply, it can be brackted by identifying the maximum inlation rate curve, <span class="math">\(\ \Delta\alpha_{\max}\)</span> and a theoretical minimum inflation curve <span class="math">\(\ \Delta\alpha_{\min}\)</span>.</p>
 <h4 id="maximum-issuance-per-block">3.4.1 Maximum issuance per block</h4>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \delta = \min\!\Bigl(\tfrac{\Delta\tau}{\sum_j p_j},\; \overline{\Delta\alpha_i}\Bigr) \tag{3.5}
-$$</span><br /></p>
-<p><br /><span class="math">$$
+\]</span></p>
+<p><span class="math">\[
 \boxed{\Delta\alpha_{\max} = 2\,\delta} \tag{3.6}
-$$</span><br /></p>
+\]</span></p>
 <h4 id="minimum-net-issuance">3.4.2 Minimum net issuance</h4>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \boxed{\Delta\alpha_{\min} = 2\,\delta - \bigl[\beta_{m}(0.41)\,\delta + B_{r} + B_{x}\bigr] \tag{3.7}}
-$$</span><br /></p>
-<p>Here <span class="math"><em>β</em><sub><em>m</em></sub></span> is the miner‑burn fraction, <span class="math"><em>B</em><sub><em>r</em></sub></span> the per‑block registration burn, and <span class="math"><em>B</em><sub><em>x</em></sub></span> any additional external burn (read revenues).</p>
-<h4 id="cumulative-supply-up-to-horizon-t">3.4.3 Cumulative supply up to horizon <span class="math"><em>T</em></span></h4>
-<p>Let <span class="math"><em>t</em><sub>0</sub></span> be subnet genesis; integrate over time <span class="math"><em>t</em></span>:</p>
-<p><br /><span class="math">$$
+\]</span></p>
+<p>Here <span class="math">\(\beta_{m}\)</span> is the miner‑burn fraction, <span class="math">\(B_{r}\)</span> the per‑block registration burn, and <span class="math">\(B_{x}\)</span> any additional external burn (read revenues).</p>
+<h4 id="cumulative-supply-up-to-horizon-t">3.4.3 Cumulative supply up to horizon <span class="math">\(T\)</span></h4>
+<p>Let <span class="math">\(t_0\)</span> be subnet genesis; integrate over time <span class="math">\(t\)</span>:</p>
+<p><span class="math">\[
 S_{\max}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\max}(t)\,\mathrm{d}t,
 \qquad
 S_{\min}(T) = \int_{t_0}^{T} \!\! \Delta\alpha_{\min}(t)\,\mathrm{d}t \tag{3.8}
-$$</span><br /></p>
+\]</span></p>
 <p>Numerical evaluation is implemented in the companion calculator.</p>
 <h4 id="estimating-future-circulating-supply">3.4.4 Estimating Future Circulating Supply</h4>
-<p>To project the circulating Alpha at a future date (<span class="math"><em>T</em></span>) you must specify:</p>
+<p>To project the circulating Alpha at a future date (<span class="math">\(T\)</span>) you must specify:</p>
 <table>
 <thead>
 <tr class="header">
@@ -225,32 +226,32 @@ $$</span><br /></p>
 <tbody>
 <tr class="odd">
 <td align="left">Existing circulating supply (today)</td>
-<td align="left"><span class="math"><em>S</em><sub>0</sub></span></td>
+<td align="left"><span class="math">\(S_0\)</span></td>
 <td align="left">as on-chain</td>
 </tr>
 <tr class="even">
-<td align="left">Average sum-of-prices <span class="math">⟨∑<em>p</em>⟩</span></td>
-<td align="left"><span class="math">Σ</span></td>
+<td align="left">Average sum-of-prices <span class="math">\(\langle\sum p\rangle\)</span></td>
+<td align="left"><span class="math">\(\Sigma\)</span></td>
 <td align="left">choose within 1 – 2</td>
 </tr>
 <tr class="odd">
 <td align="left">Miner-burn fraction</td>
-<td align="left"><span class="math"><em>β</em><sub><em>m</em></sub></span></td>
+<td align="left"><span class="math">\(\beta_m\)</span></td>
 <td align="left">0 – 1</td>
 </tr>
 <tr class="even">
 <td align="left">Registration burn / block</td>
-<td align="left"><span class="math"><em>B</em><sub><em>r</em></sub></span></td>
+<td align="left"><span class="math">\(B_r\)</span></td>
 <td align="left">daily burn / 7,200</td>
 </tr>
 <tr class="odd">
 <td align="left">External burn / block</td>
-<td align="left"><span class="math"><em>B</em><sub><em>x</em></sub></span></td>
+<td align="left"><span class="math">\(B_x\)</span></td>
 <td align="left">daily burn / 7,200</td>
 </tr>
 <tr class="even">
 <td align="left">Next TAO-halving date</td>
-<td align="left"><span class="math"><em>T</em><sub><em>h</em></sub></span></td>
+<td align="left"><span class="math">\(T_h\)</span></td>
 <td align="left">calendar date</td>
 </tr>
 </tbody>
@@ -258,42 +259,42 @@ $$</span><br /></p>
 <h4 id="block-level-issuance-across-a-halving-boundary">3.4.5 Block-level issuance across a halving boundary</h4>
 <p>Let</p>
 <ul>
-<li><span class="math"><em>D</em> = <em>T</em> − <em>t</em><sub>now</sub></span> = days until horizon,<br /></li>
-<li><span class="math"><em>D</em><sub><em>h</em></sub></span> = days from <em>now</em> to the TAO-halving date <span class="math"><em>T</em><sub><em>h</em></sub></span> (clip to 0 if <span class="math"><em>T</em> ≤ <em>T</em><sub><em>h</em></sub></span>),<br /></li>
+<li><span class="math">\(D = T - t_{\text{now}}\)</span> = days until horizon,<br /></li>
+<li><span class="math">\(D_h\)</span> = days from <em>now</em> to the TAO-halving date <span class="math">\(T_h\)</span> (clip to 0 if <span class="math">\(T \le T_h\)</span>),<br /></li>
 <li>7 200 blocks per day.</li>
 </ul>
-<p>Split the horizon into <strong>Segment 1</strong> (pre-halving, <span class="math"><em>D</em><sub>1</sub> = min(<em>D</em>, <em>D</em><sub><em>h</em></sub>)</span>) and <strong>Segment 2</strong> (post-halving, <span class="math"><em>D</em><sub>2</sub> = <em>D</em> − <em>D</em><sub>1</sub></span>).</p>
-<p>For each segment <span class="math"><em>k</em> ∈ {1, 2}</span> set</p>
-<p><br /><span class="math">$$
+<p>Split the horizon into <strong>Segment 1</strong> (pre-halving, <span class="math">\(D_1 = \min(D, D_h)\)</span>) and <strong>Segment 2</strong> (post-halving, <span class="math">\(D_2 = D - D_1\)</span>).</p>
+<p>For each segment <span class="math">\(k\in\{1,2\}\)</span> set</p>
+<p><span class="math">\[
 \Delta\tau^{(k)} =
 \begin{cases}
 \Delta\tau_{\text{current}}, &amp; k=1 \\
 \frac{1}{2}\,\Delta\tau_{\text{current}}, &amp; k=2
 \end{cases}\tag{3.9}
-$$</span><br /></p>
+\]</span></p>
 <p>Compute the per-block limit</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \delta^{(k)} = \min\!\Bigl(\tfrac{\Delta\tau^{(k)}}{\Sigma},
                            \overline{\Delta\alpha_{i}}\Bigr)\tag{3.10}
-$$</span><br /></p>
+\]</span></p>
 <h4 id="net-alpha-minted-in-each-segment">3.4.6 Net Alpha minted in each segment</h4>
 <p>Net per block</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \Delta\alpha_{\text{net}}^{(k)} =
   2\,\delta^{(k)} -
   \bigl[\beta_m\,(0.41)\,\delta^{(k)} + B_r + B_x\bigr]\tag{3.11}
-$$</span><br /></p>
+\]</span></p>
 <p>Total minted</p>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 M^{(k)} = 7\,200 \times D_k \times \Delta\alpha_{\text{net}}^{(k)}\tag{3.12}
-$$</span><br /></p>
-<h4 id="projected-circulating-supply-at-t">3.4.7 Projected circulating supply at <span class="math"><em>T</em></span></h4>
-<p><br /><span class="math">$$
+\]</span></p>
+<h4 id="projected-circulating-supply-at-t">3.4.7 Projected circulating supply at <span class="math">\(T\)</span></h4>
+<p><span class="math">\[
 \boxed{S(T) = S_0 + M^{(1)} + M^{(2)}}\tag{3.13}
-$$</span><br /></p>
+\]</span></p>
 <blockquote>
-<p><strong>Worked example</strong><br /><em>Inputs:</em> <span class="math"><em>S</em><sub>0</sub> = 2.5</span> M Alpha, <span class="math">Σ = 1.5</span>, <span class="math"><em>β</em><sub><em>m</em></sub> = 0.25</span>,<br /><span class="math"><em>B</em><sub><em>r</em></sub> = 0.02</span>, <span class="math"><em>B</em><sub><em>x</em></sub> = 0</span> Alpha block⁻¹, current <span class="math">Δ<em>τ</em> = 1</span>,<br />TAO halving in 180 days, horizon <span class="math"><em>T</em></span> in 540 days.</p>
-<p>Segment-level calculations yield <span class="math"><em>M</em><sup>(1)</sup> ≈ 0.47</span> M,<br /><span class="math"><em>M</em><sup>(2)</sup> ≈ 0.18</span> M, hence <span class="math"><em>S</em>(<em>T</em>) ≈ 3.15</span> M Alpha.</p>
+<p><strong>Worked example</strong><br /><em>Inputs:</em> <span class="math">\(S_0 = 2.5\)</span> M Alpha, <span class="math">\(\Sigma = 1.5\)</span>, <span class="math">\(\beta_m = 0.25\)</span>,<br /><span class="math">\(B_r = 0.02\)</span>, <span class="math">\(B_x = 0\)</span> Alpha block⁻¹, current <span class="math">\(\Delta\tau = 1\)</span>,<br />TAO halving in 180 days, horizon <span class="math">\(T\)</span> in 540 days.</p>
+<p>Segment-level calculations yield <span class="math">\(M^{(1)} \approx 0.47\)</span> M,<br /><span class="math">\(M^{(2)} \approx 0.18\)</span> M, hence <span class="math">\(S(T) \approx 3.15\)</span> M Alpha.</p>
 </blockquote>
 <hr />
 <h2 id="synthesising-a-valuation-range">4 Synthesising a valuation range</h2>
@@ -305,9 +306,9 @@ $$</span><br /></p>
 <li>Scale by forecast supply at horizon <em>T</em>.</li>
 <li>Apply illiquidity discount $$ (20–40 %).</li>
 </ol>
-<p><br /><span class="math">$$
+<p><span class="math">\[
 \text{Price range}=\Bigl[\,\tfrac{\text{NPC}}{S_{\max}(T)},\; \tfrac{\text{NPVU}+\text{Premium}}{S_{\min}(T)}\Bigr] (1-\lambda). \tag{4.1}
-$$</span><br /></p>
+\]</span></p>
 <hr />
 <h2 id="caveats-sensitivity-levers">5 Caveats &amp; sensitivity levers</h2>
 <p>Below are the key caveats and sensitivity levers that have not been applied in this simplified model. It is important to mention that the circulating supply estimates should act as a reference but not the absolute truth.</p>
