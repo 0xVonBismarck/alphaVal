@@ -28,12 +28,12 @@ This valuation rubric therefore aims to help:
 
 | Pillar             | What it measures                                             | Output           |
 | ------------------ | ------------------------------------------------------------ | ---------------- |
-| **(i) CoP**        | Net‑present cost to operate all required miners + validators | Floor valuation  |
-| **(ii) NPVU**      | Discounted cash‑flow from end‑users (ARPU × users)           | Market upside    |
-| **(iii) Comps**    | Comparable AI/Web3 deal valuations        | Sentiment‑anchor |
-| **(iv) Inflation** | Max/min circulating Alpha at investor horizon                | Supply‑anchor    |
+| **Cost of Participation**        | Net‑present cost to operate all required miners + validators | Floor valuation  |
+| **Net Present Value of Users**      | Discounted cash‑flow from end‑users (ARPU × users)           | Market upside    |
+| **Comparables**    | Comparable AI/Web3 deal valuations        | Sentiment‑anchor |
+| **Inflation Analysis** | Max/min circulating Alpha at investor horizon                | Supply‑anchor    |
 
-### 3.1 Cost‑of‑Participation (CoP) — economic floor
+### 3.1 Cost of Participation (CoP) — economic floor
 
 The CoP quantifies the minimum rational valuation at which miners and validators will continue to participate. Should a subnet trade below this level, rational operators will redirect resources to more profitable alternatives. This should represent the floor of the valuation range. 
 
